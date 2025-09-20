@@ -42,7 +42,7 @@ log_success "코드 업데이트 완료"
 
 # 의존성 업데이트 (필요한 경우)
 log_info "📦 의존성 확인 중..."
-sudo npm install
+sudo npm install --legacy-peer-deps --force
 log_success "의존성 확인 완료"
 
 # 웹 빌드 재생성

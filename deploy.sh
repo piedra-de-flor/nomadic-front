@@ -72,7 +72,7 @@ fi
 
 # 5. 의존성 설치
 log_info "📦 의존성 설치 중..."
-sudo npm install
+sudo npm install --legacy-peer-deps --force
 log_success "의존성 설치 완료"
 
 # 6. 웹 빌드 생성
