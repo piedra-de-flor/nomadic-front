@@ -213,12 +213,32 @@ const RecommendScreen = ({ navigation, route }: any) => {
   // 추천 장소 클릭 핸들러
   const handleRecommendationPress = useCallback((recommendation: Recommendation) => {
     console.log('🏛️ 추천 장소 클릭:', recommendation);
+    
+    // 로그인 체크
+    if (!user) {
+      Alert.alert(
+        '로그인 필요',
+        '추천 상세 정보를 보려면 로그인이 필요합니다.',
+        [
+          {
+            text: '취소',
+            style: 'cancel',
+          },
+          {
+            text: '로그인',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ]
+      );
+      return;
+    }
+    
     navigation.navigate('RecommendDetail', { 
       recommendationId: recommendation.id,
       type: recommendation.type,
       fromTab: activeTab // 현재 탭 정보 전달
     });
-  }, [navigation, activeTab]);
+  }, [navigation, activeTab, user]);
 
   // 이미지 로딩 함수 (풍경 사진 배열 사용)
   const loadImage = useCallback((recommendationId: number): string => {

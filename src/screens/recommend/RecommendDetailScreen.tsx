@@ -136,10 +136,29 @@ const RecommendDetailScreen = ({ navigation, route }: any) => {
   
   const COMMENTS_PER_PAGE = 10;
 
+  // 로그인 체크
+  useEffect(() => {
+    if (!user) {
+      Alert.alert(
+        '로그인 필요',
+        '추천 상세 정보를 보려면 로그인이 필요합니다.',
+        [
+          {
+            text: '확인',
+            onPress: () => navigation.goBack(),
+          },
+        ]
+      );
+      return;
+    }
+  }, [user, navigation]);
+
   // 추천 장소 상세 정보 로드
   useEffect(() => {
-    loadRecommendationDetail();
-  }, [recommendationId]);
+    if (user) {
+      loadRecommendationDetail();
+    }
+  }, [recommendationId, user]);
 
   // 댓글 로드
   useEffect(() => {

@@ -11,6 +11,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 import { UI_CONFIG } from '../../constants';
 
 // 추천 게시물 타입 정의
@@ -213,6 +214,9 @@ const mockRecommendations: Recommendation[] = [
 ];
 
 const RecommendListScreen = ({ navigation }: any) => {
+  // Redux 상태
+  const { user } = useSelector((state: any) => state.auth);
+  
   // 초기에 랜덤으로 10개만 표시
   const getRandomRecommendations = () => {
     const shuffled = [...mockRecommendations].sort(() => 0.5 - Math.random());
@@ -247,6 +251,25 @@ const RecommendListScreen = ({ navigation }: any) => {
   };
 
   const handleRecommendationPress = (recommendation: Recommendation) => {
+    // 로그인 체크
+    if (!user) {
+      Alert.alert(
+        '로그인 필요',
+        '추천 상세 정보를 보려면 로그인이 필요합니다.',
+        [
+          {
+            text: '취소',
+            style: 'cancel',
+          },
+          {
+            text: '로그인',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ]
+      );
+      return;
+    }
+    
     navigation.navigate('RecommendDetail', { 
       recommendationId: recommendation.id,
       fromPage: 'recommend'

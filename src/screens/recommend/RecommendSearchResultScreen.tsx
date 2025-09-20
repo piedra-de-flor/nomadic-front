@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import { LoadingDots } from '../../components/ui';
 
 // 추천 게시물 타입 정의
@@ -215,6 +216,10 @@ const allMockRecommendations: Recommendation[] = [
 
 const RecommendSearchResultScreen = ({ navigation, route }: any) => {
   const { searchQuery } = route.params || { searchQuery: '제주도' };
+  
+  // Redux 상태
+  const { user } = useSelector((state: any) => state.auth);
+  
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [selectedSort, setSelectedSort] = useState<SortOption>('date');
   const [showSortOptions, setShowSortOptions] = useState(false);
@@ -357,6 +362,25 @@ const RecommendSearchResultScreen = ({ navigation, route }: any) => {
   };
 
   const handleRecommendationPress = (recommendation: Recommendation) => {
+    // 로그인 체크
+    if (!user) {
+      Alert.alert(
+        '로그인 필요',
+        '추천 상세 정보를 보려면 로그인이 필요합니다.',
+        [
+          {
+            text: '취소',
+            style: 'cancel',
+          },
+          {
+            text: '로그인',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ]
+      );
+      return;
+    }
+    
     navigation.navigate('RecommendDetail', { 
       recommendationId: recommendation.id,
       fromPage: 'searchResult',
