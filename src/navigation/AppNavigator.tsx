@@ -115,7 +115,10 @@ const MainTabNavigator = () => {
 // 인증 스택 네비게이터
 const AuthStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ 
+      headerShown: false,
+      gestureEnabled: false // iOS 스와이프 제스처로 뒤로가기 비활성화
+    }}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
     </Stack.Navigator>
@@ -125,10 +128,21 @@ const AuthStackNavigator = () => {
 // 메인 스택 네비게이터 (탭 네비게이터 포함)
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ 
+      headerShown: false,
+      gestureEnabled: false // iOS 스와이프 제스처로 뒤로가기 비활성화
+    }}>
       <Stack.Screen name="MainTabs" component={MainTabNavigator} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen 
+        name="Login" 
+        component={LoginScreen} 
+        options={{ gestureEnabled: false }} // 로그인 화면에서 스와이프 제스처 비활성화
+      />
+      <Stack.Screen 
+        name="SignUp" 
+        component={SignUpScreen} 
+        options={{ gestureEnabled: false }} // 회원가입 화면에서 스와이프 제스처 비활성화
+      />
       <Stack.Screen name="PlanDetail" component={PlanDetailScreen} />
       <Stack.Screen name="PlanCreate" component={PlanCreateScreen} />
       <Stack.Screen name="PlanEdit" component={PlanEditScreen} />

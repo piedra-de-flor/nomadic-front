@@ -1,6 +1,6 @@
 // API 관련 상수
 export const API_CONFIG = {
-  BASE_URL: 'http://192.168.219.112:8080', // 휴대폰에서 접근 시 컴퓨터 IP 사용
+  BASE_URL: 'http://50.19.209.214:8080', // 휴대폰에서 접근 시 컴퓨터 IP 사용
   TIMEOUT: 10000,
   ENDPOINTS: {
     // 인증
