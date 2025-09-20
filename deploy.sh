@@ -75,7 +75,12 @@ log_info "📦 의존성 설치 중..."
 sudo npm install --legacy-peer-deps --force
 log_success "의존성 설치 완료"
 
-# 6. 웹 빌드 생성
+# 6. 웹 빌드 의존성 설치
+log_info "🌐 웹 빌드 의존성 설치 중..."
+sudo npm install @expo/metro-runtime react-dom react-native-web --legacy-peer-deps --force
+log_success "웹 빌드 의존성 설치 완료"
+
+# 7. 웹 빌드 생성
 log_info "🏗️ 웹 빌드 생성 중..."
 sudo npx expo export --platform web
 log_success "웹 빌드 완료"
@@ -95,6 +100,30 @@ server {
     
     root $PROJECT_DIR/dist;
     index index.html;
+    
+    # API 프록시 설정
+    location /api/ {
+        proxy_pass http://50.19.209.214:8080/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        
+        # CORS 헤더 추가
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS";
+        add_header Access-Control-Allow-Headers "Authorization, Content-Type, Accept";
+        
+        # OPTIONS 요청 처리
+        if (\$request_method = 'OPTIONS') {
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS";
+            add_header Access-Control-Allow-Headers "Authorization, Content-Type, Accept";
+            add_header Content-Length 0;
+            add_header Content-Type text/plain;
+            return 200;
+        }
+    }
     
     # Gzip 압축 활성화
     gzip on;

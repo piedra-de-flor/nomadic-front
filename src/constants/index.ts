@@ -1,6 +1,6 @@
 // API 관련 상수
 export const API_CONFIG = {
-  BASE_URL: 'http://50.19.209.214:8080', // 휴대폰에서 접근 시 컴퓨터 IP 사용
+  BASE_URL: '/api', // Nginx 프록시를 통한 API 접근
   TIMEOUT: 10000,
   ENDPOINTS: {
     // 인증

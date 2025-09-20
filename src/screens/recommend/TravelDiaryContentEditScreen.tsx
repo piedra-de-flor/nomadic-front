@@ -198,7 +198,7 @@ const TravelDiaryContentEditScreen = ({ navigation, route }: any) => {
         }
 
         console.log(`🌐 API 요청 시작 - 블록 ${block.orderIndex + 1}:`);
-        console.log(`  URL: http://192.168.219.112:8080/recommend/${recommendationId}/blocks`);
+        console.log(`  URL: http:///api/recommend/${recommendationId}/blocks`);
         console.log(`  Method: POST`);
         console.log(`  Headers: Authorization: Bearer ${token.substring(0, 20)}...`);
 

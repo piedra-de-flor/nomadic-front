@@ -256,7 +256,7 @@ const TravelDiaryWriteScreen = ({ navigation }: any) => {
       }
 
       console.log('🌐 API 요청 시작:');
-      console.log('  URL: http://192.168.219.112:8080/recommend');
+      console.log('  URL: http:///api/recommend');
       console.log('  Method: POST');
       console.log('  Headers:', {
         'Authorization': `Bearer ${token}`,
@@ -264,7 +264,7 @@ const TravelDiaryWriteScreen = ({ navigation }: any) => {
       console.log('  Body: FormData with', Array.from(formData.keys()).length, 'fields');
 
       // 1단계: 여행기 기본 정보 생성 API 호출
-      const response = await fetch('http://192.168.219.112:8080/recommend', {
+      const response = await fetch('http:///api/recommend', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

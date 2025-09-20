@@ -321,7 +321,7 @@ export const deleteRecommendation = async (
   try {
     console.log('🔄 추천 장소 삭제 시작:', { placeId, token: token.substring(0, 20) + '...' });
     
-    const response = await fetch(`http://192.168.219.112:8080/recommend?placeId=${placeId}`, {
+    const response = await fetch(`/api/recommend?placeId=${placeId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -413,11 +413,11 @@ export const setMainImageOfRecommendation = async (
     console.log(`  image: [File] ${imageFile.name || 'unnamed'} (${imageFile.type || 'unknown type'})`);
     
     console.log('🌐 메인 이미지 API 요청 시작:');
-    console.log(`  URL: http://192.168.219.112:8080/recommend/image?recommendationId=${recommendationId}`);
+    console.log(`  URL: http:///api/recommend/image?recommendationId=${recommendationId}`);
     console.log(`  Method: POST`);
     console.log(`  Headers: Authorization: Bearer ${token.substring(0, 20)}...`);
     
-    const response = await fetch(`http://192.168.219.112:8080/recommend/image?recommendationId=${recommendationId}`, {
+    const response = await fetch(`http:///api/recommend/image?recommendationId=${recommendationId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -523,12 +523,12 @@ export const updateRecommendation = async (
     };
     
     console.log('🌐 추천 장소 수정 API 요청 시작:');
-    console.log(`  URL: http://192.168.219.112:8080/recommend`);
+    console.log(`  URL: http:///api/recommend`);
     console.log(`  Method: PATCH`);
     console.log(`  Headers: Authorization: Bearer ${token.substring(0, 20)}...`);
     console.log(`  Body:`, JSON.stringify(requestBody, null, 2));
     
-    const response = await fetch(`http://192.168.219.112:8080/recommend`, {
+    const response = await fetch(`http:///api/recommend`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -636,11 +636,11 @@ export const updateRecommendationBlock = async (
     // FormData.entries()는 React Native에서 지원되지 않으므로 로그 제거
     
     console.log('🌐 블록 수정 API 요청 시작:');
-    console.log(`  URL: http://192.168.219.112:8080/recommend/blocks/${blockId}`);
+    console.log(`  URL: http:///api/recommend/blocks/${blockId}`);
     console.log(`  Method: PATCH`);
     console.log(`  Headers: Authorization: Bearer ${token.substring(0, 20)}...`);
     
-    const response = await fetch(`http://192.168.219.112:8080/recommend/blocks/${blockId}`, {
+    const response = await fetch(`http:///api/recommend/blocks/${blockId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -721,11 +721,11 @@ export const deleteRecommendationBlock = async (
     console.log('🔄 추천 장소 블록 삭제 시작:', { blockId });
     
     console.log('🌐 블록 삭제 API 요청 시작:');
-    console.log(`  URL: http://192.168.219.112:8080/recommend/blocks/${blockId}`);
+    console.log(`  URL: http:///api/recommend/blocks/${blockId}`);
     console.log(`  Method: DELETE`);
     console.log(`  Headers: Authorization: Bearer ${token.substring(0, 20)}...`);
     
-    const response = await fetch(`http://192.168.219.112:8080/recommend/blocks/${blockId}`, {
+    const response = await fetch(`http:///api/recommend/blocks/${blockId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -813,12 +813,12 @@ export const addRecommendationBlock = async (
     // FormData.entries()는 React Native에서 지원되지 않으므로 로그 제거
     
     console.log('🌐 블록 API 요청 시작:');
-    console.log(`  URL: http://192.168.219.112:8080/recommend/${recommendationId}/blocks`);
+    console.log(`  URL: http:///api/recommend/${recommendationId}/blocks`);
     console.log(`  Method: POST`);
     console.log(`  Headers: Authorization: Bearer ${token.substring(0, 20)}...`);
     console.log(`  Body: FormData with fields`);
     
-    const response = await fetch(`http://192.168.219.112:8080/recommend/${recommendationId}/blocks`, {
+    const response = await fetch(`http:///api/recommend/${recommendationId}/blocks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',
